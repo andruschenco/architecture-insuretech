@@ -1,0 +1,170 @@
+<mxfile host="drawio-plugin" modified="2026-07-04T12:08:22.935Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" etag="rzsPJt1aqr5VuaQMkjd2" version="23.1.5" type="embed">
+  <diagram id="23iRSUPoRavnBvh4doch" name="Page-1">
+    <mxGraphModel dx="1025" dy="760" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" value="&lt;b&gt;Текущая архитектура InsureTech (as-is)&lt;/b&gt;&lt;br&gt;(Синхронные REST-взаимодействия)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontColor=#01579B;" vertex="1" parent="1">
+          <mxGeometry x="350" y="20" width="330" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="3" value="Клиент" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#E8F5E9;strokeColor=#388E3C;fontColor=#1B5E20;" vertex="1" parent="1">
+          <mxGeometry x="50" y="285" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4" value="B2B Партнер" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#E8F5E9;strokeColor=#388E3C;fontColor=#1B5E20;" vertex="1" parent="1">
+          <mxGeometry x="50" y="390" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5" value="Kubernetes Cluster (1 зона доступности)" style="swimlane;whiteSpace=wrap;html=1;fillColor=#FEFEFE;strokeColor=#0288D1;dashed=1;fontColor=#01579B;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="115" y="110" width="800" height="610" as="geometry" />
+        </mxCell>
+        <mxCell id="6" value="&lt;b&gt;core-app&lt;/b&gt;&lt;br&gt;(Монолит)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;fontColor=#01579B;" vertex="1" parent="5">
+          <mxGeometry x="180" y="220" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="7" value="&lt;b&gt;client-info&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;fontColor=#01579B;" vertex="1" parent="5">
+          <mxGeometry x="380" y="110" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8" value="&lt;b&gt;ins-product-aggregator&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;fontColor=#01579B;" vertex="1" parent="5">
+          <mxGeometry x="545" y="322.5" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="9" value="&lt;b&gt;ins-comp-settlement&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;fontColor=#01579B;" vertex="1" parent="5">
+          <mxGeometry x="305" y="500" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="10" value="&lt;b&gt;Локальная реплика продуктов&lt;/b&gt;&lt;br&gt;обновляется раз в сутки" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#FFF9C4;strokeColor=#FBC02D;fontSize=10;align=center;" vertex="1" parent="5">
+          <mxGeometry x="340" y="50" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="11" value="&lt;b&gt;Локальная реплика продуктов&lt;/b&gt;&lt;br&gt;обновляется каждые 15 мин" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#FFF9C4;strokeColor=#FBC02D;fontSize=10;align=center;" vertex="1" parent="5">
+          <mxGeometry x="560" y="50" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="12" value="&lt;b&gt;⚠️ Проблемы core-app&lt;/b&gt;&lt;br&gt;• Синхронные REST-запросы&lt;br&gt;• Медленная загрузка страниц&lt;br&gt;• Нет Rate Limiting для B2B" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#FFF9C4;strokeColor=#FBC02D;fontSize=11;align=left;" vertex="1" parent="5">
+          <mxGeometry x="30" y="40" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="13" value="&lt;b&gt;K8s LoadBalancer&lt;/b&gt;&lt;br&gt;Публичный доступ к API" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#FFF9C4;strokeColor=#FBC02D;fontSize=11;align=left;" vertex="1" parent="5">
+          <mxGeometry x="80" y="140" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="14" style="endArrow=none;html=1;dashed=1;strokeColor=#FBC02D;" edge="1" parent="5" source="13" target="6">
+          <mxGeometry x="0.5" relative="1" as="geometry">
+            <mxPoint x="85" y="-20" as="sourcePoint" />
+            <mxPoint x="100" y="-30" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="15" value="&lt;b&gt;⚠️ Проблемы settlement&lt;/b&gt;&lt;br&gt;• Устаревшие данные (раз в сутки)&lt;br&gt;• Синхронный запрос к core-app" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#FFF9C4;strokeColor=#FBC02D;fontSize=11;align=left;" vertex="1" parent="5">
+          <mxGeometry x="490" y="510" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="16" value="&lt;b&gt;PostgreSQL&lt;/b&gt;&lt;br&gt;(Отдельная ВМ)" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=15;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#F57C00;fontColor=#E65100;" vertex="1" parent="5">
+          <mxGeometry x="30" y="490" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="17" value="SQL (схема core-app)" style="endArrow=classic;html=1;fontSize=11;fontColor=#D32F2F;strokeColor=#D32F2F;" edge="1" parent="5" source="6" target="16">
+          <mxGeometry x="0.5" relative="1" as="geometry">
+            <mxPoint x="100" y="40" as="sourcePoint" />
+            <mxPoint x="360" y="540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="18" value="SQL (схема client-info)" style="endArrow=classic;html=1;fontSize=11;fontColor=#D32F2F;strokeColor=#D32F2F;" edge="1" parent="5" source="7" target="16">
+          <mxGeometry x="0.5" relative="1" as="geometry">
+            <mxPoint x="100" y="-70" as="sourcePoint" />
+            <mxPoint x="420" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="19" value="SQL (схема settlement)" style="endArrow=classic;html=1;fontSize=11;fontColor=#D32F2F;strokeColor=#D32F2F;" edge="1" parent="5" source="9" target="16">
+          <mxGeometry x="0.5" relative="1" as="geometry">
+            <mxPoint x="100" y="270" as="sourcePoint" />
+            <mxPoint x="420" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="20" value="&lt;b&gt;⚠️ Проблемы aggregator&lt;/b&gt;&lt;br&gt;• Единая точка отказа&lt;br&gt;• Последовательные запросы к 5 компаниям&lt;br&gt;• При росте до 10 — замедление" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fillColor=#FFF9C4;strokeColor=#FBC02D;fontSize=11;align=left;" vertex="1" parent="5">
+          <mxGeometry x="535" y="230" width="245" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="21" value="Страховая компания 1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;fontColor=#01579B;" vertex="1" parent="1">
+          <mxGeometry x="940" y="450" width="160" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="22" value="Страховая компания 2" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;fontColor=#01579B;" vertex="1" parent="1">
+          <mxGeometry x="940" y="515" width="160" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="23" value="Страховая компания 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;fontColor=#01579B;" vertex="1" parent="1">
+          <mxGeometry x="940" y="575" width="160" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="24" value="Страховая компания 4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;fontColor=#01579B;" vertex="1" parent="1">
+          <mxGeometry x="940" y="630" width="160" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="25" value="Страховая компания 5" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0288D1;fontColor=#01579B;" vertex="1" parent="1">
+          <mxGeometry x="940" y="685" width="160" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="26" value="REST (поиск ~50 RPS)" style="endArrow=classic;html=1;fontSize=11;fontColor=#D32F2F;strokeColor=#D32F2F;" edge="1" parent="1" source="3" target="6">
+          <mxGeometry x="0.2584" y="-10" relative="1" as="geometry">
+            <mxPoint x="25" y="150" as="sourcePoint" />
+            <mxPoint x="135" y="150" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="27" value="REST (оформление ~10 RPS)" style="endArrow=classic;html=1;fontSize=11;fontColor=#D32F2F;strokeColor=#D32F2F;" edge="1" parent="1" source="3" target="6">
+          <mxGeometry x="-0.2893" relative="1" as="geometry">
+            <mxPoint x="25" y="170" as="sourcePoint" />
+            <mxPoint x="135" y="170" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28" value="REST API (B2B)&lt;br&gt;(до 250 RPS)" style="endArrow=classic;html=1;fontSize=11;fontColor=#D32F2F;strokeColor=#D32F2F;" edge="1" parent="1" source="4" target="6">
+          <mxGeometry x="0.0606" y="-4" relative="1" as="geometry">
+            <mxPoint x="25" y="320" as="sourcePoint" />
+            <mxPoint x="135" y="320" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="29" value="REST\n(получение/обновление данных)" style="endArrow=classic;html=1;fontSize=11;fontColor=#D32F2F;strokeColor=#D32F2F;" edge="1" parent="1" source="6" target="7">
+          <mxGeometry x="0.5" relative="1" as="geometry">
+            <mxPoint x="225" y="80" as="sourcePoint" />
+            <mxPoint x="225" y="40" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="30" value="REST (каждые 15 мин)\&lt;br&gt;nполучение продуктов и тарифов" style="endArrow=classic;html=1;fontSize=11;fontColor=#D32F2F;strokeColor=#D32F2F;" edge="1" parent="1" source="6" target="8">
+          <mxGeometry x="0.0906" y="-10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="295" y="115" as="sourcePoint" />
+            <mxPoint x="335" y="115" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="31" value="REST (раз в сутки)\nполучение оформленных страховок" style="endArrow=classic;html=1;fontSize=11;fontColor=#D32F2F;strokeColor=#D32F2F;" edge="1" parent="1" source="6" target="9">
+          <mxGeometry x="0.5" relative="1" as="geometry">
+            <mxPoint x="225" y="150" as="sourcePoint" />
+            <mxPoint x="225" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="32" value="REST (раз в сутки)\nполучение продуктов и тарифов" style="endArrow=classic;html=1;fontSize=11;fontColor=#D32F2F;strokeColor=#D32F2F;" edge="1" parent="1" source="9" target="8">
+          <mxGeometry x="0.5" relative="1" as="geometry">
+            <mxPoint x="295" y="345" as="sourcePoint" />
+            <mxPoint x="415" y="115" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="33" value="REST" style="endArrow=classic;html=1;fontSize=11;fontColor=#D32F2F;strokeColor=#D32F2F;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="8" target="21">
+          <mxGeometry x="0.5" relative="1" as="geometry">
+            <mxPoint x="495" y="115" as="sourcePoint" />
+            <mxPoint x="935" y="67" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="34" value="REST" style="endArrow=classic;html=1;fontSize=11;fontColor=#D32F2F;strokeColor=#D32F2F;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="8" target="22">
+          <mxGeometry x="0.5" relative="1" as="geometry">
+            <mxPoint x="495" y="115" as="sourcePoint" />
+            <mxPoint x="935" y="112" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="35" value="REST" style="endArrow=classic;html=1;fontSize=11;fontColor=#D32F2F;strokeColor=#D32F2F;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="8" target="23">
+          <mxGeometry x="0.5" relative="1" as="geometry">
+            <mxPoint x="495" y="115" as="sourcePoint" />
+            <mxPoint x="935" y="157" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="36" value="REST" style="endArrow=classic;html=1;fontSize=11;fontColor=#D32F2F;strokeColor=#D32F2F;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="8" target="24">
+          <mxGeometry x="0.5" relative="1" as="geometry">
+            <mxPoint x="495" y="115" as="sourcePoint" />
+            <mxPoint x="940" y="488" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="37" value="REST" style="endArrow=classic;html=1;fontSize=11;fontColor=#D32F2F;strokeColor=#D32F2F;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="8" target="25">
+          <mxGeometry x="0.5" relative="1" as="geometry">
+            <mxPoint x="495" y="115" as="sourcePoint" />
+            <mxPoint x="935" y="247" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
