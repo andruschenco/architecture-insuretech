@@ -1,0 +1,91 @@
+"""
+Базовые скалярные типы
+"""
+scalar Date
+
+"""
+Типы документов
+"""
+enum DocumentType {
+  PASSPORT
+  DRIVER_LICENSE
+  INN
+  SNILS
+}
+
+"""
+Информация о клиенте
+"""
+type Client {
+  id: ID!
+  name: String!
+  age: Int!
+
+  """
+  Список документов клиента
+  """
+  documents(types: [DocumentType!]): [Document!]!
+
+  """
+  Список родственников клиента
+  """
+  relatives: [Relative!]!
+}
+
+"""
+Документ клиента
+"""
+type Document {
+  id: ID!
+  type: DocumentType!
+  number: String!
+  issueDate: Date!
+  expiryDate: Date!
+}
+
+"""
+Информация о родственнике
+"""
+type Relative {
+  id: ID!
+  relationType: String!
+  name: String!
+  age: Int!
+}
+
+"""
+Корневой тип Query
+"""
+type Query {
+  """
+  Получить клиента по ID
+  """
+  client(id: ID!): Client
+
+  """
+  Получить список клиентов
+  """
+  clients(ids: [ID!]): [Client!]!
+
+  """
+  Поиск клиентов
+  """
+  searchClients(
+    name: String
+    ageMin: Int
+    ageMax: Int
+  ): [Client!]!
+
+  """
+  Получить документы клиента
+  """
+  documents(
+    clientId: ID!
+    types: [DocumentType!]
+  ): [Document!]!
+
+  """
+  Получить родственников клиента
+  """
+  relatives(clientId: ID!): [Relative!]!
+}
